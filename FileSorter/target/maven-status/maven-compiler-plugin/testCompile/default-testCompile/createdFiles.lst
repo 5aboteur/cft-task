@@ -1,1 +1,4 @@
-filesorter/AppTest.class
+filesorter/util/FileContentPairTest.class
+filesorter/application/AppSettingsBuildTest.class
+filesorter/util/CmdLineArgumentsParserTest.class
+filesorter/sort/InsertionSorterTest.class

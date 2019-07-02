@@ -1,1 +1,4 @@
-/home/saboteur/Programming/cft/wooosh/cft-task/FileSorter/src/test/java/filesorter/AppTest.java
+/home/tereshkov/deletdis/cft-task/FileSorter/src/test/java/filesorter/application/AppSettingsBuildTest.java
+/home/tereshkov/deletdis/cft-task/FileSorter/src/test/java/filesorter/util/FileContentPairTest.java
+/home/tereshkov/deletdis/cft-task/FileSorter/src/test/java/filesorter/util/CmdLineArgumentsParserTest.java
+/home/tereshkov/deletdis/cft-task/FileSorter/src/test/java/filesorter/sort/InsertionSorterTest.java

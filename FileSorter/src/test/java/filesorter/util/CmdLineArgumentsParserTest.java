@@ -1,23 +1,22 @@
-package filesorter;
-
-import java.nio.file.NotDirectoryException;
+package filesorter.util;
 
 import org.junit.Test;
 
+import filesorter.util.cmdline.CmdLineArgumentsParser;
+
 /**
- * Unit tests for App.
+ * Unit tests for CmdLineArgumentsParser.
  */
-public class AppTest 
+public class CmdLineArgumentsParserTest 
 {
     @Test
     public void testNoArgumentsPassed()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = new String[0];
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
 
         }
     }
@@ -25,15 +24,14 @@ public class AppTest
     @Test
     public void testNotAllArgumentsPassed()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             "/test/things/up",
             "--out-prefix=test"
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -41,7 +39,6 @@ public class AppTest
     @Test
     public void testIncorrectPath()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             "%_&incorrect/path?",
             "--out-prefix=sorted_",
@@ -50,8 +47,8 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -59,7 +56,6 @@ public class AppTest
     @Test
     public void testInvalidOption()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             ".",
             "--",
@@ -69,8 +65,8 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -78,7 +74,6 @@ public class AppTest
     @Test
     public void testUnknownOption()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             ".",
             "--super-option=true",
@@ -88,8 +83,8 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -97,7 +92,6 @@ public class AppTest
     @Test
     public void testNoOptionValue()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             ".",
             "--out-prefix=sorted_",
@@ -106,8 +100,8 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -115,7 +109,6 @@ public class AppTest
     @Test
     public void testUnknownContentType()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             ".",
             "--out-prefix=sorted_",
@@ -124,8 +117,8 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
@@ -133,7 +126,6 @@ public class AppTest
     @Test
     public void testUnknownSortMode()
     {
-        App.AppSettings settings = new App.AppSettings();
         String[] args = {
             ".",
             "--out-prefix=sorted_",
@@ -142,8 +134,26 @@ public class AppTest
         };
 
         try {
-            App.cmdLineArgsParse(args, settings);
-        } catch (IllegalArgumentException | NotDirectoryException e) {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
+            
+        }
+    }
+
+    @Test
+    public void testIncorrectWorkersNumber()
+    {
+        String[] args = {
+            ".",
+            "--out-prefix=sorted_",
+            "--content-type=i",
+            "--sort-mode=a",
+            "--workers=435345353453534535"
+        };
+
+        try {
+            CmdLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
             
         }
     }
