@@ -48,8 +48,8 @@ public class ContentSaver
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
 
             try {
-                for (Object s: pair.getRawContent()) {
-                    bw.write(s.toString());
+                for (String s: pair.getRawContent()) {
+                    bw.write(s);
                     bw.newLine();
                 }    
             } catch (IOException e) {
